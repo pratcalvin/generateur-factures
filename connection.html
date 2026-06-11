@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>Se connecter</h2>
+
+    <form id="login-form">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Mot de passe" required>
+        <button type="submit" class="btn-login">Se connecter</button>
+    </form>
+
+    <p id="erreur" style="color:red; display:none;">Email ou mot de passe incorrect.</p>
+
+    <p class="pas_compte">
+        Pas encore de compte ?
+        <a href="creer_compte.html">Créer un compte</a>
+    </p>
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const emailSaisi = document.getElementById('email').value;
+            const mdpSaisi = document.getElementById('password').value;
+
+            const compte = JSON.parse(localStorage.getItem('compte'));
+
+            if (compte && emailSaisi === compte.email && mdpSaisi === compte.password) {
+                window.location.href = 'facture.html';
+            } else {
+                document.getElementById('erreur').style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>

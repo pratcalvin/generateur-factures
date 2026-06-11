@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="profil.css">
+    <title>Profil</title>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Mon Profil</h2>
+
+        <div class="section">
+            <h3>Informations</h3>
+            <p><i class="fa-solid fa-building"></i> Entreprise : <span id="entreprise">—</span></p>
+            <p><i class="fa-solid fa-envelope"></i> Email : <span id="email">—</span></p>
+            <p><i class="fa-solid fa-phone"></i> Téléphone : <span id="telephone">—</span></p>
+            <p><i class="fa-solid fa-id-card"></i> N° SIRET : <span id="siret">—</span></p>
+            <button class="btn" id="changer-entreprise"><i class="fa-solid fa-pen"></i> Modifier</button>
+        </div>
+
+        <div class="section">
+            <button class="btn"><i class="fa-solid fa-headset"></i> Support</button>
+            <button class="btn logout" onclick="logout()">
+                <i class="fa-solid fa-right-from-bracket"></i> Déconnexion
+            </button>
+        </div>
+    </div>
+
+    <div class="nav">
+        <i class="fa-solid fa-file-invoice nav-icon" onclick="loadContent('facture')" title="Facture"></i>
+        <i class="fa-solid fa-user nav-icon" onclick="loadContent('profil')" title="Profil"></i>
+    </div>
+
+    <script>
+        if (!localStorage.getItem('compte')) {
+            window.location.href = 'connection.html';
+        }
+
+        function afficherProfil() {
+            const compte = JSON.parse(localStorage.getItem('compte'));
+            if (!compte) return;
+
+            document.getElementById('entreprise').textContent = compte.nom || '—';
+            document.getElementById('email').textContent = compte.email || '—';
+            document.getElementById('telephone').textContent = compte.telephone || '—';
+            document.getElementById('siret').textContent = compte.siret || '—';
+        }
+
+        afficherProfil();
+
+        document.getElementById('changer-entreprise').addEventListener('click', () => {
+            const compte = JSON.parse(localStorage.getItem('compte')) || {};
+
+            const nouvelleEntreprise = prompt('Nouveau nom d\'entreprise :');
+            if (!nouvelleEntreprise) return;
+
+            let nouveauSiret;
+            do {
+                nouveauSiret = prompt('Nouveau numéro SIRET (14 chiffres) :');
+                if (!nouveauSiret) return;
+                if (!/^\d{14}$/.test(nouveauSiret)) {
+                    alert('❌ Le SIRET doit contenir exactement 14 chiffres.');
+                }
+            } while (!/^\d{14}$/.test(nouveauSiret));
+
+            const nouveauMail = prompt('Nouvel email :');
+            if (nouveauMail) compte.email = nouveauMail;
+
+            const nouveauTel = prompt('Nouvel téléphone :');
+            if (nouveauTel) compte.telephone = nouveauTel;
+
+            compte.nom = nouvelleEntreprise;
+            compte.siret = nouveauSiret;
+
+            localStorage.setItem('compte', JSON.stringify(compte));
+
+            afficherProfil();
+            alert('✅ Profil mis à jour !');
+        });
+
+        function logout() {
+            window.location.href = 'connection.html';
+        }
+
+        function loadContent(page) {
+            window.location.href = page + '.html';
+        }
+    </script>
+
+</body>
+
+</html>

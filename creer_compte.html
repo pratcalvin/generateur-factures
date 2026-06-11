@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créer un compte</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h2>Créer un compte</h2>
+
+    <form id="signup-form">
+        <input type="text" id="nom" placeholder="Nom de l'entreprise" required>
+        <input type="text" id="prenom" placeholder="Prénom du responsable" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="tel" id="telephone" placeholder="Téléphone" required>
+        <input type="text" id="adresse" placeholder="Adresse complète" required>
+        <input type="text" id="siret" placeholder="Numéro SIRET (14 chiffres)" maxlength="14" required>
+        <input type="url" id="logo" placeholder="Lien du logo (facultatif)">
+        <input type="password" id="password" placeholder="Mot de passe" required>
+        <button type="submit" class="btn-create">Créer</button>
+    </form>
+
+    <p id="erreur" style="color:red; display:none;">Le numéro SIRET doit contenir exactement 14 chiffres.</p>
+
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const siret = document.getElementById('siret').value;
+
+            if (!/^\d{14}$/.test(siret)) {
+                document.getElementById('erreur').style.display = 'block';
+                return;
+            }
+
+            const compte = {
+                nom: document.getElementById('nom').value,
+                prenom: document.getElementById('prenom').value,
+                email: document.getElementById('email').value,
+                telephone: document.getElementById('telephone').value,
+                adresse: document.getElementById('adresse').value,
+                siret: siret,
+                password: document.getElementById('password').value
+            };
+
+            localStorage.setItem('compte', JSON.stringify(compte));
+
+            alert('Compte créé avec succès !');
+            window.location.href = 'connection.html';
+        });
+    </script>
+</body>
+
+</html>

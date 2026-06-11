@@ -1,0 +1,133 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f6fa;
+    color: #333;
+    padding: 30px 20px 100px 20px;
+    min-height: 100vh;
+}
+
+h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #2f3640;
+}
+
+h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: #2f3640;
+}
+
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.section p {
+    font-size: 15px;
+    margin: 4px 0;
+}
+
+.section i {
+    margin-right: 8px;
+    color: #ffffff;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #00a8ff;
+    color: #fff;
+    border: none;
+    padding: 11px 16px;
+    border-radius: 9px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: fit-content;
+}
+
+.btn:hover {
+    background-color: #0097e6;
+    transform: translateY(-1px);
+}
+
+.logout {
+    background-color: #e84118;
+}
+
+.logout:hover {
+    background-color: #c23616;
+}
+
+.nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: #111;
+    padding: 14px 0;
+    border-top: 1px solid #333;
+    border-radius: 6px 6px 0 0;
+    z-index: 9999;
+}
+
+.nav-icon {
+    font-size: 26px;
+    color: #0097e6;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.nav-icon:hover {
+    color: #00a8ff;
+    transform: scale(1.15);
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        padding: 20px 15px 100px 15px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+
+    .section {
+        padding: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

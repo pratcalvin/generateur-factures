@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facture</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="facture.css">
+</head>
+
+<body>
+
+    <h2>Création de facture</h2>
+
+    <form id="facture-form" novalidate>
+
+        <div class="section">
+            <h3>Entreprise</h3>
+            <input type="text" id="nomEntreprise" placeholder="Nom de l'entreprise" required>
+            <input type="text" id="siret" placeholder="Numéro SIRET (14 chiffres)" maxlength="14" required>
+            <span class="msg-erreur" id="erreur-siret">Le numéro SIRET doit contenir exactement 14 chiffres.</span>
+            <input type="number" id="numFacture" placeholder="Numéro de facture" min="1" required>
+            <input type="text" id="adresseEntreprise" placeholder="Adresse de l'entreprise" required>
+        </div>
+
+        <div class="section">
+            <h3>Client</h3>
+            <input type="text" id="nomClient" placeholder="Nom du client" required>
+            <input type="text" id="adresseClient" placeholder="Adresse du client" required>
+            <input type="tel" id="telephone" placeholder="Téléphone (ex: 06 12 34 56 78)" required>
+            <span class="msg-erreur" id="erreur-tel">Le numéro de téléphone n'est pas valide.</span>
+            <input type="date" id="date" required>
+            <input type="text" id="paiement" placeholder="Moyen de paiement (ex: virement, chèque)">
+        </div>
+
+        <div class="section">
+            <h3>Articles</h3>
+            <div id="produits-container">
+                <div class="produit-ligne">
+                    <input type="text" class="produit-nom" placeholder="Nom de l'article" required>
+                    <input type="number" class="produit-quantite" placeholder="Quantité" min="1" required>
+                    <input type="number" class="produit-prix" placeholder="Prix unitaire (€)" min="0" step="0.01"
+                        required>
+                    <button type="button" class="supprimer-produit">✕</button>
+                </div>
+            </div>
+            <button type="button" id="ajouter-produit">+ Ajouter un article</button>
+        </div>
+
+        <div class="section totaux">
+            <p>Sous-total : <span id="sousTotal">0.00</span> €</p>
+            <p>TVA (20%) : <span id="tva">0.00</span> €</p>
+            <p class="total-ttc">Total TTC : <span id="totalTTC">0.00</span> €</p>
+        </div>
+
+        <button type="button" id="btn-create">⬇ Télécharger la facture</button>
+
+    </form>
+
+    <div class="nav">
+        <i class="fa-solid fa-file-invoice nav-icon" onclick="loadContent('facture')" title="Facture"></i>
+        <i class="fa-solid fa-user nav-icon" onclick="loadContent('profil')" title="Profil"></i>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script src="facture.js"></script>
+    <script>if (!localStorage.getItem('compte')) {
+            window.location.href = 'connection.html';
+        }
+    </script>
+
+</body>
+
+</html>

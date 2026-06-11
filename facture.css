@@ -1,0 +1,213 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f6fa;
+    color: #333;
+    padding: 30px 20px 100px 20px;
+}
+
+h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #2f3640;
+    margin-bottom: 25px;
+}
+
+h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #2f3640;
+    margin-bottom: 15px;
+}
+
+#facture-form {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.section input {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    font-size: 14px;
+    background-color: #fafafa;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.section input:focus {
+    outline: none;
+    border-color: #00a8ff;
+    box-shadow: 0 0 0 3px rgba(0, 168, 255, 0.15);
+    background-color: #fff;
+}
+
+.section input.erreur {
+    border-color: #e84118;
+    box-shadow: 0 0 0 3px rgba(232, 65, 24, 0.15);
+}
+
+.section input::placeholder {
+    color: #aaa;
+}
+
+.msg-erreur {
+    font-size: 12px;
+    color: #e84118;
+    display: none;
+    margin-top: -5px;
+}
+
+.produit-ligne {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 10px;
+    align-items: center;
+}
+
+.supprimer-produit {
+    background-color: #e84118;
+    color: #fff;
+    border: none;
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+}
+
+.supprimer-produit:hover {
+    background-color: #c23616;
+}
+
+#ajouter-produit {
+    background-color: #00a8ff;
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    width: fit-content;
+    transition: background-color 0.3s;
+}
+
+#ajouter-produit:hover {
+    background-color: #0097e6;
+}
+
+.totaux {
+    gap: 8px;
+}
+
+.totaux p {
+    font-size: 15px;
+    font-weight: 500;
+    color: #2f3640;
+}
+
+.totaux p span {
+    font-weight: 700;
+    color: #00a8ff;
+}
+
+.totaux .total-ttc span {
+    font-size: 18px;
+    color: #44bd32;
+}
+
+#btn-create {
+    background-color: #44bd32;
+    color: #fff;
+    border: none;
+    padding: 14px;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+#btn-create:hover {
+    background-color: #4cd137;
+    transform: translateY(-1px);
+}
+
+.nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background: #111;
+    padding: 14px 0;
+    border-top: 1px solid #333;
+    z-index: 9999;
+}
+
+.nav-icon {
+    font-size: 26px;
+    color: #0097e6;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.2s;
+}
+
+.nav-icon:hover {
+    color: #00a8ff;
+    transform: scale(1.15);
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        padding: 20px 15px 100px 15px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    .produit-ligne {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+    }
+
+    .produit-ligne input:first-child {
+        grid-column: 1 / -1;
+    }
+
+    .supprimer-produit {
+        grid-column: 2;
+        justify-self: end;
+    }
+
+    #btn-create {
+        font-size: 15px;
+        padding: 12px;
+    }
+}

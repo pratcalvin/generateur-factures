@@ -1,0 +1,115 @@
+/* ================== BASE ================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f6fa;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* ================== TITRES ================== */
+h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: #2f3640;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* ================== CARTE (formulaire) ================== */
+form {
+    background-color: #fff;
+    padding: 35px 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* ================== INPUTS ================== */
+input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 15px;
+    color: #333;
+    background-color: #fafafa;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #00a8ff;
+    box-shadow: 0 0 0 3px rgba(0, 168, 255, 0.15);
+    background-color: #fff;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+/* ================== BOUTONS ================== */
+.btn-login,
+.btn-create {
+    width: 100%;
+    padding: 13px;
+    background-color: #00a8ff;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 5px;
+}
+
+.btn-login:hover,
+.btn-create:hover {
+    background-color: #0097e6;
+    transform: translateY(-1px);
+}
+
+.btn-login:active,
+.btn-create:active {
+    transform: translateY(0);
+}
+
+/* ================== LIEN "Pas de compte" ================== */
+.pas_compte {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+}
+
+.pas_compte a {
+    color: #00a8ff;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.pas_compte a:hover {
+    text-decoration: underline;
+}
+
+/* ================== MESSAGE ERREUR ================== */
+#erreur {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 10px;
+}
