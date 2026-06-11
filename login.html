@@ -34,7 +34,7 @@
             const compte = JSON.parse(localStorage.getItem('compte'));
 
             if (compte && emailSaisi === compte.email && mdpSaisi === compte.password) {
-                window.location.href = 'facture.html';
+                window.location.href = 'index.html';
             } else {
                 document.getElementById('erreur').style.display = 'block';
             }
