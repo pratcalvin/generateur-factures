@@ -19,6 +19,7 @@
             <p><i class="fa-solid fa-envelope"></i> Email : <span id="email">—</span></p>
             <p><i class="fa-solid fa-phone"></i> Téléphone : <span id="telephone">—</span></p>
             <p><i class="fa-solid fa-id-card"></i> N° SIRET : <span id="siret">—</span></p>
+            <p><i class="fa-solid fa-location-dot"></i> Adresse : <span id="adresse">—</span></p>
             <button class="btn" id="changer-entreprise"><i class="fa-solid fa-pen"></i> Modifier</button>
         </div>
 
@@ -48,6 +49,7 @@
             document.getElementById('email').textContent = compte.email || '—';
             document.getElementById('telephone').textContent = compte.telephone || '—';
             document.getElementById('siret').textContent = compte.siret || '—';
+            document.getElementById('adresse').textContent = compte.adresse || '—';
         }
 
         afficherProfil();
@@ -55,26 +57,30 @@
         document.getElementById('changer-entreprise').addEventListener('click', () => {
             const compte = JSON.parse(localStorage.getItem('compte')) || {};
 
-            const nouvelleEntreprise = prompt('Nouveau nom d\'entreprise :');
+            const nouvelleEntreprise = prompt('Nouveau nom d\'entreprise :', compte.nom || '');
             if (!nouvelleEntreprise) return;
 
             let nouveauSiret;
             do {
-                nouveauSiret = prompt('Nouveau numéro SIRET (14 chiffres) :');
+                nouveauSiret = prompt('Nouveau numéro SIRET (14 chiffres) :', compte.siret || '');
                 if (!nouveauSiret) return;
                 if (!/^\d{14}$/.test(nouveauSiret)) {
                     alert('❌ Le SIRET doit contenir exactement 14 chiffres.');
                 }
             } while (!/^\d{14}$/.test(nouveauSiret));
 
-            const nouveauMail = prompt('Nouvel email :');
+            const nouvelleAdresse = prompt('Nouvelle adresse :', compte.adresse || '');
+            if (!nouvelleAdresse) return;
+
+            const nouveauMail = prompt('Nouvel email :', compte.email || '');
             if (nouveauMail) compte.email = nouveauMail;
 
-            const nouveauTel = prompt('Nouvel téléphone :');
+            const nouveauTel = prompt('Nouveau téléphone :', compte.telephone || '');
             if (nouveauTel) compte.telephone = nouveauTel;
 
             compte.nom = nouvelleEntreprise;
             compte.siret = nouveauSiret;
+            compte.adresse = nouvelleAdresse;
 
             localStorage.setItem('compte', JSON.stringify(compte));
 

@@ -17,11 +17,14 @@
 
         <div class="section">
             <h3>Entreprise</h3>
-            <input type="text" id="nomEntreprise" placeholder="Nom de l'entreprise" required>
-            <input type="text" id="siret" placeholder="Numéro SIRET (14 chiffres)" maxlength="14" required>
-            <span class="msg-erreur" id="erreur-siret">Le numéro SIRET doit contenir exactement 14 chiffres.</span>
+            <div class="entreprise-recap">
+                <p><i class="fa-solid fa-building"></i> <span id="recapNom">—</span></p>
+                <p><i class="fa-solid fa-id-card"></i> SIRET : <span id="recapSiret">—</span></p>
+                <p><i class="fa-solid fa-location-dot"></i> <span id="recapAdresse">—</span></p>
+            </div>
+            <a href="profil.html" class="lien-modifier">Modifier dans mon profil →</a>
+
             <input type="number" id="numFacture" placeholder="Numéro de facture" min="1" required>
-            <input type="text" id="adresseEntreprise" placeholder="Adresse de l'entreprise" required>
         </div>
 
         <div class="section">
@@ -66,7 +69,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     <script src="facture.js"></script>
-    <script>if (!localStorage.getItem('compte')) {
+    <script>
+        if (!localStorage.getItem('compte')) {
             window.location.href = 'connection.html';
         }
     </script>

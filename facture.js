@@ -1,5 +1,14 @@
 const { jsPDF } = window.jspdf;
 
+const compte = JSON.parse(localStorage.getItem('compte')) || {};
+
+function afficherRecapEntreprise() {
+    document.getElementById("recapNom").textContent = compte.nom || '—';
+    document.getElementById("recapSiret").textContent = compte.siret || '—';
+    document.getElementById("recapAdresse").textContent = compte.adresse || '—';
+}
+afficherRecapEntreprise();
+
 function updateTotals() {
     const lignes = document.querySelectorAll(".produit-ligne");
     let sousTotal = 0;
@@ -41,19 +50,6 @@ document.querySelectorAll(".produit-ligne").forEach(l => {
 
 updateTotals();
 
-document.getElementById("siret").addEventListener("input", function () {
-    const val = this.value.replace(/\D/g, "");
-    this.value = val;
-    const erreur = document.getElementById("erreur-siret");
-    if (val.length > 0 && val.length !== 14) {
-        this.classList.add("erreur");
-        erreur.style.display = "block";
-    } else {
-        this.classList.remove("erreur");
-        erreur.style.display = "none";
-    }
-});
-
 document.getElementById("telephone").addEventListener("input", function () {
     const val = this.value.trim();
     const erreur = document.getElementById("erreur-tel");
@@ -68,17 +64,14 @@ document.getElementById("telephone").addEventListener("input", function () {
 });
 
 document.getElementById("btn-create").addEventListener("click", () => {
-    const siret = document.getElementById("siret").value;
-    if (!/^\d{14}$/.test(siret)) {
-        alert("❌ Le numéro SIRET doit contenir exactement 14 chiffres.");
-        document.getElementById("siret").focus();
+    if (!compte.nom || !/^\d{14}$/.test(compte.siret || '') || !compte.adresse) {
+        alert("❌ Ton profil entreprise est incomplet (nom, SIRET ou adresse manquant). Rends-toi sur ta page profil pour le compléter.");
+        window.location.href = 'profil.html';
         return;
     }
 
     const champsObligatoires = [
-        { id: "nomEntreprise", label: "Nom de l'entreprise" },
         { id: "numFacture", label: "Numéro de facture" },
-        { id: "adresseEntreprise", label: "Adresse de l'entreprise" },
         { id: "nomClient", label: "Nom du client" },
         { id: "adresseClient", label: "Adresse du client" },
         { id: "telephone", label: "Téléphone" },
@@ -93,9 +86,11 @@ document.getElementById("btn-create").addEventListener("click", () => {
         }
     }
 
-    const nomEntreprise = document.getElementById("nomEntreprise").value;
+    const nomEntreprise = compte.nom;
+    const siret = compte.siret;
+    const adresseEntreprise = compte.adresse;
+
     const numFacture = document.getElementById("numFacture").value;
-    const adresseEntreprise = document.getElementById("adresseEntreprise").value;
     const nomClient = document.getElementById("nomClient").value;
     const adresseClient = document.getElementById("adresseClient").value;
     const telephone = document.getElementById("telephone").value;
